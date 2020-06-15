@@ -1,3 +1,3 @@
-# (June 15, 2020) This is a working fork for Windows only created for personal use.
+# (June 15, 2020) This is a working fork created for personal use (on Windows).
 
 See original: https://github.com/jabbalaci/graphviz-java-api
