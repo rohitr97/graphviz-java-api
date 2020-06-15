@@ -1,4 +1,4 @@
-# Working fork for Windows only
+# (June 15, 2020) This is a working fork for Windows only created for personal use.
 
 **New (Jan 9, 2017):** This project is not maintained anymore. If you want
 to add something to it, make a fork. Thanks.
