@@ -1,5 +1,3 @@
-package com.github.jabbalaci.graphviz;
-
 // GraphViz.java - a simple API to call dot from Java programs
 
 /*$Id$*/
