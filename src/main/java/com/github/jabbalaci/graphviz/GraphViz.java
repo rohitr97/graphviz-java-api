@@ -118,25 +118,12 @@ public class GraphViz
 
     private String executable;
 
-    /**
-     * Convenience Constructor with default OS specific pathes
-     * creates a new GraphViz object that will contain a graph.
-     * Windows:
-     * executable = c:/Program Files (x86)/Graphviz 2.28/bin/dot.exe
-     * tempDir = c:/temp
-     * MacOs:
-     * executable = /usr/local/bin/dot
-     * tempDir = /tmp
-     * Linux:
-     * executable = /usr/bin/dot
-     * tempDir = /tmp
-     */
     public GraphViz() {
         this.executable = "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe";
     }
 
     /**
-     * Configurable Constructor with path to executable dot and a temp dir
+     * Configurable Constructor with path to executable dot
      *
      * @param executable absolute path to dot executable
      */
