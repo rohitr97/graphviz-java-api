@@ -1,3 +1,5 @@
+package com.github.jabbalaci.graphviz;
+
 // GraphViz.java - a simple API to call dot from Java programs
 
 /*$Id$*/
@@ -75,11 +77,6 @@ import java.io.InputStreamReader;
 public class GraphViz
 {
     /**
-     * Detects the client's operating system.
-     */
-    private final static String osName = System.getProperty("os.name").replaceAll("\\s","");
-
-    /**
      * The image size in dpi. 96 dpi is normal size. Higher values are 10% higher each.
      * Lower values 10% lower each.
      *
@@ -119,35 +116,32 @@ public class GraphViz
      */
     private StringBuilder graph = new StringBuilder();
 
-    private String tempDir;
-
     private String executable;
 
     /**
-     * Default constructor, for Windows
+     * Convenience Constructor with default OS specific pathes
+     * creates a new GraphViz object that will contain a graph.
+     * Windows:
+     * executable = c:/Program Files (x86)/Graphviz 2.28/bin/dot.exe
+     * tempDir = c:/temp
+     * MacOs:
+     * executable = /usr/local/bin/dot
+     * tempDir = /tmp
+     * Linux:
+     * executable = /usr/bin/dot
+     * tempDir = /tmp
      */
     public GraphViz() {
-        if (GraphViz.osName.contains("Windows")) {
-            this.tempDir = "c:/temp";
-            this.executable = "c:/Program Files (x86)/Graphviz 2.28/bin/dot.exe";
-        } else if (GraphViz.osName.equals("MacOSX")) {
-            this.tempDir = "/tmp";
-            this.executable = "/usr/local/bin/dot";
-        } else if (GraphViz.osName.equals("Linux")) {
-            this.tempDir = "/tmp";
-            this.executable = "/usr/bin/dot";
-        }
+        this.executable = "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe";
     }
 
     /**
      * Configurable Constructor with path to executable dot and a temp dir
      *
      * @param executable absolute path to dot executable
-     * @param tempDir absolute path to temp directory
      */
-    public GraphViz(String executable, String tempDir) {
+    public GraphViz(String executable) {
         this.executable = executable;
-        this.tempDir = tempDir;
     }
 
     /**
@@ -269,7 +263,7 @@ public class GraphViz
         byte[] img_stream = null;
 
         try {
-            img = File.createTempFile("graph_", "." + type, new File(this.tempDir));
+            img = File.createTempFile("graph_", "." + type, null);
             Runtime rt = Runtime.getRuntime();
 
             // patch by Mike Chenault
@@ -291,7 +285,7 @@ public class GraphViz
             }
         }
         catch (java.io.IOException ioe) {
-            System.err.println("Error:    in I/O processing of tempfile in dir " + tempDir + "\n");
+            System.err.println("Error:    in I/O processing of tempfile\n");
             System.err.println("       or in calling external command");
             ioe.printStackTrace();
         }
@@ -313,7 +307,7 @@ public class GraphViz
     {
         File temp;
         try {
-            temp = File.createTempFile("graph_", ".dot.tmp", new File(tempDir));
+            temp = File.createTempFile("graph_", ".dot.tmp", null);
             FileWriter fout = new FileWriter(temp);
             fout.write(str);
             fout.close();
